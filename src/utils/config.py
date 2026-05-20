@@ -1,0 +1,111 @@
+from pathlib import Path
+
+BASE_DIR = Path(r"C:\Users\DS\Desktop\hallux valgus test")
+
+RAW_DIR = BASE_DIR / "data" / "raw"
+XRAY_IMAGE_DIR = RAW_DIR / "xray_images"
+REAL_FOOT_IMAGE_DIR = RAW_DIR / "real_foot_images"
+
+ANNOTATION_DIR = RAW_DIR / "annotations"
+DATASETS_CSV = ANNOTATION_DIR / "datasets.csv"
+DATASETS_V2_CSV = ANNOTATION_DIR / "datasets_v2.csv"
+CVAT_XML = ANNOTATION_DIR / "annotations.xml"
+
+PROCESSED_DIR = BASE_DIR / "data" / "processed"
+
+AXIS_DATASET_DIR = PROCESSED_DIR / "axis_dataset"
+AXIS_IMAGE_DIR = AXIS_DATASET_DIR / "images"
+AXIS_OVERLAY_DIR = AXIS_DATASET_DIR / "overlays"
+PROCESSED_AXIS_CSV = AXIS_DATASET_DIR / "processed_axis_dataset.csv"
+
+XRAY_SILHOUETTE_DIR = PROCESSED_DIR / "xray_silhouette_dataset"
+XRAY_SILHOUETTE_IMAGE_DIR = XRAY_SILHOUETTE_DIR / "images"
+XRAY_SILHOUETTE_MASK_DIR = XRAY_SILHOUETTE_DIR / "masks"
+XRAY_SILHOUETTE_OVERLAY_DIR = XRAY_SILHOUETTE_DIR / "overlays"
+PROCESSED_SILHOUETTE_CSV = XRAY_SILHOUETTE_DIR / "processed_silhouette_dataset.csv"
+
+REAL_FOOT_SILHOUETTE_DIR = PROCESSED_DIR / "real_foot_silhouette"
+REAL_FOOT_SILHOUETTE_IMAGE_DIR = REAL_FOOT_SILHOUETTE_DIR / "images"
+REAL_FOOT_SILHOUETTE_MASK_DIR = REAL_FOOT_SILHOUETTE_DIR / "masks"
+REAL_FOOT_SILHOUETTE_OVERLAY_DIR = REAL_FOOT_SILHOUETTE_DIR / "overlays"
+REAL_FOOT_SILHOUETTE_CSV = REAL_FOOT_SILHOUETTE_DIR / "real_foot_silhouette.csv"
+
+SPLIT_DIR = BASE_DIR / "data" / "splits"
+
+AXIS_TRAIN_CSV = SPLIT_DIR / "axis_train.csv"
+AXIS_VAL_CSV = SPLIT_DIR / "axis_val.csv"
+AXIS_TEST_CSV = SPLIT_DIR / "axis_test.csv"
+
+SILHOUETTE_TRAIN_CSV = SPLIT_DIR / "silhouette_train.csv"
+SILHOUETTE_VAL_CSV = SPLIT_DIR / "silhouette_val.csv"
+SILHOUETTE_TEST_CSV = SPLIT_DIR / "silhouette_test.csv"
+
+MODEL_DIR = BASE_DIR / "models"
+
+AXIS_MODEL_DIR = MODEL_DIR / "axis_model"
+BEST_AXIS_MODEL = AXIS_MODEL_DIR / "best_axis_model.pth"
+LAST_AXIS_MODEL = AXIS_MODEL_DIR / "last_axis_model.pth"
+
+SILHOUETTE_MODEL_DIR = MODEL_DIR / "silhouette_model"
+BEST_SILHOUETTE_MODEL = SILHOUETTE_MODEL_DIR / "best_silhouette_model.pth"
+LAST_SILHOUETTE_MODEL = SILHOUETTE_MODEL_DIR / "last_silhouette_model.pth"
+
+OUTPUT_DIR = BASE_DIR / "outputs"
+
+AXIS_OUTPUT_DIR = OUTPUT_DIR / "axis_model"
+AXIS_PREDICTION_DIR = AXIS_OUTPUT_DIR / "predictions"
+AXIS_OUTPUT_OVERLAY_DIR = AXIS_OUTPUT_DIR / "overlays"
+AXIS_LOG_DIR = AXIS_OUTPUT_DIR / "logs"
+AXIS_METRIC_DIR = AXIS_OUTPUT_DIR / "metrics"
+
+SILHOUETTE_OUTPUT_DIR = OUTPUT_DIR / "silhouette_model"
+SILHOUETTE_PREDICTION_DIR = SILHOUETTE_OUTPUT_DIR / "predictions"
+SILHOUETTE_OUTPUT_OVERLAY_DIR = SILHOUETTE_OUTPUT_DIR / "overlays"
+SILHOUETTE_LOG_DIR = SILHOUETTE_OUTPUT_DIR / "logs"
+SILHOUETTE_METRIC_DIR = SILHOUETTE_OUTPUT_DIR / "metrics"
+
+REAL_FOOT_OUTPUT_DIR = OUTPUT_DIR / "real_foot_test"
+REAL_FOOT_PREDICTION_DIR = REAL_FOOT_OUTPUT_DIR / "predictions"
+REAL_FOOT_OUTPUT_OVERLAY_DIR = REAL_FOOT_OUTPUT_DIR / "overlays"
+REAL_FOOT_METRIC_DIR = REAL_FOOT_OUTPUT_DIR / "metrics"
+
+IMG_SIZE = 512
+SEED = 42
+BATCH_SIZE = 8
+NUM_WORKERS = 0
+DEVICE = "cuda"
+
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+
+
+def make_dirs() -> None:
+    dirs = [
+        XRAY_IMAGE_DIR,
+        REAL_FOOT_IMAGE_DIR,
+        ANNOTATION_DIR,
+        AXIS_IMAGE_DIR,
+        AXIS_OVERLAY_DIR,
+        XRAY_SILHOUETTE_IMAGE_DIR,
+        XRAY_SILHOUETTE_MASK_DIR,
+        XRAY_SILHOUETTE_OVERLAY_DIR,
+        REAL_FOOT_SILHOUETTE_IMAGE_DIR,
+        REAL_FOOT_SILHOUETTE_MASK_DIR,
+        REAL_FOOT_SILHOUETTE_OVERLAY_DIR,
+        SPLIT_DIR,
+        AXIS_MODEL_DIR,
+        SILHOUETTE_MODEL_DIR,
+        AXIS_PREDICTION_DIR,
+        AXIS_OUTPUT_OVERLAY_DIR,
+        AXIS_LOG_DIR,
+        AXIS_METRIC_DIR,
+        SILHOUETTE_PREDICTION_DIR,
+        SILHOUETTE_OUTPUT_OVERLAY_DIR,
+        SILHOUETTE_LOG_DIR,
+        SILHOUETTE_METRIC_DIR,
+        REAL_FOOT_PREDICTION_DIR,
+        REAL_FOOT_OUTPUT_OVERLAY_DIR,
+        REAL_FOOT_METRIC_DIR,
+    ]
+
+    for d in dirs:
+        d.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,29 @@
+# 가상환경
+.venv/
+.venv_win/
+venv/
+env/
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 모델 가중치 (대용량)
+models/
+*.pth
+
+# 원본 데이터 및 처리된 이미지 (대용량)
+data/raw/
+data/processed/
+
+# Claude Code 내부 파일
+.claude/
+
+# 임시/로그
+v5_log.txt
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
