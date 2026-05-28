@@ -1,46 +1,3 @@
-# =============================================================================
-# [파일명] save_all_feet_cutout.py
-# [역할]   YOLO 모델로 이미지 내 모든 발을 세그멘테이션하고, 각 발을 개별
-#          파일로 저장한다. 하나의 마스크 안에 분리된 영역이 있으면 connected
-#          component 분석으로 각각 분리하고, IoU 기반 중복 제거도 수행한다.
-#          한 이미지에 양발이 함께 찍혀 있을 때 왼발/오른발을 자동 분리하여
-#          저장하는 데 적합하다.
-#
-# [파이프라인 순서] 4단계 옵션 C - 모든 발 개별 저장 (권장)
-#   ┌─────────────────────────────────────────────────────────────────────┐
-#   │ (1) cvat_xml_to_yolo_seg.py        (학습 데이터 변환)              │
-#   │ (2) YOLO 모델 학습                                                │
-#   │ (3) predict_foot_mask_filtered.py  (추론 결과 시각화/검증)          │
-#   │ (4) 아래 3개 중 하나 선택:                                         │
-#   │       save_foot_cutout.py          (1발, 원본 크기)                │
-#   │       save_foot_cutout_cropped.py  (1발, crop)                     │
-#   │     ► save_all_feet_cutout.py      ← 현재 파일 (모든 발, 개별 crop)│
-#   │ (5) save_foot_contours.py          (발 외곽선 추출)                │
-#   │ (6) extract_forefoot_regions.py    (전족부 영역 추출 - 미구현)      │
-#   └─────────────────────────────────────────────────────────────────────┘
-#
-# [사전 준비]
-#   - 학습 완료된 YOLO 모델 가중치 파일 (.pt)
-#   - 원본 발 사진이 들어있는 폴더
-#   - 필요 패키지: pip install ultralytics opencv-python numpy
-#
-# [실행 방법]
-#   아래 "설정" 섹션의 경로를 본인 환경에 맞게 수정한 후 실행:
-#   python src/foot_preprocessing/save_all_feet_cutout.py
-#
-# [수정이 필요한 변수]
-#   MODEL_PATH          : 학습된 YOLO 모델 가중치 경로
-#   SOURCE_DIR          : 원본 이미지 폴더 경로
-#   OUTPUT_DIR          : 결과 저장 폴더 경로
-#   PADDING             : crop 시 발 주변 여백 (px, 기본: 10)
-#   MIN_COMPONENT_AREA  : 잡음 제거 최소 면적 (px, 기본: 2000)
-#   IOU_DUP_THRESHOLD   : 중복 마스크 제거 IoU 기준 (기본: 0.6)
-#
-# [출력]
-#   OUTPUT_DIR에 발별로 분리된 투명 배경 PNG 이미지가 저장됨.
-#   파일명 예시: IMG001_foot1.png, IMG001_foot2.png
-# =============================================================================
-
 from pathlib import Path
 import cv2
 import numpy as np
@@ -49,7 +6,7 @@ from ultralytics import YOLO
 # =========================
 # 설정
 # =========================
-MODEL_PATH = "runs/segment/roboflow_foot_yolo11n_seg-2/weights/best.pt"
+MODEL_PATH = "models/foot_seg_yolo11n_best.pt"
 SOURCE_DIR = "data/raw/foot_photos/images"
 OUTPUT_DIR = "data/processed/foot_cutout_all"
 
