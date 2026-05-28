@@ -16,6 +16,7 @@ models/
 # 원본 데이터 및 처리된 이미지 (대용량)
 data/raw/
 data/processed/
+runs/
 
 # Claude Code 내부 파일
 .claude/
